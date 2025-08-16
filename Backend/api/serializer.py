@@ -15,3 +15,4 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["id", "username", "password"]
 
 #testing push 
+#test for this stupid ass git shit 
