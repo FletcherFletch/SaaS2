@@ -1,0 +1,10 @@
+[33m2a86196[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: commit: Stop tracking .env
+[33me3c84a9[m HEAD@{1}: commit: Removed Files
+[33m5b57afc[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{2}: commit: This is a test push
+[33m4320d55[m HEAD@{3}: rebase (finish): returning to refs/heads/main
+[33m4320d55[m HEAD@{4}: rebase (start): checkout HEAD~2
+[33m24083bd[m HEAD@{5}: commit: Removed .env from Git tracking and update .gitgnore
+[33ma76380c[m HEAD@{6}: commit: Adding Stripe payment features, built models and views for customers
+[33m4320d55[m HEAD@{7}: pull origin main: Fast-forward
+[33mb505474[m HEAD@{8}: Branch: renamed refs/heads/master to refs/heads/main
+[33mb505474[m HEAD@{10}: commit (initial): Initial commit
