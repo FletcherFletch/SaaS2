@@ -10,12 +10,14 @@ import stripe
 from helper import billing
 from .models import Customer
 from rest_framework.permissions import AllowAny
+import stripe
+import os
 
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
 
 
-class Customer(APIView):
+class CustomerCreate(APIView):
 
     permission_classes = [AllowAny]
 

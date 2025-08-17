@@ -20,7 +20,14 @@ class Customer(models.Model):
         return f"{self.user.username}"
 
     def save(self, *args, **kwargs):
-        stripe_response = helper.billing.create_customer(raw=True)
-        print(stripe_response)
+        
+        
+        if not self.strip_id:
+            email = self.user.email
+            if email != "" or email is not None:
+
+                stripe_id = helper.billing.create_customer(email= email, raw=True)
+                self.strip_id = stripe_id
+        
 
         super().save(*args, **kwargs)
