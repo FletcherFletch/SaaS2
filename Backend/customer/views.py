@@ -61,12 +61,26 @@ class CustomerCreate(APIView):
             #create_customer is a write operations, should not be done in a GET request
 
 
-            customer = Customer.objects.get(user_email=email)
+            #customer = Customer.objects.get(user__email=email)
+
+            #this is querying the local database's Customer table which stores
+                # a OneToOne link to the User
+                # A stripe_id 
+
+            #if a stripe customer was made outside of this app (like in postman or stripe dashboard) then there is no matching entry in the Django Database
+            #could use shell to make a entry or query stripe directctly
+
+            customers = stripe.Customer.list(email=email).data
+            #this uses djangos double underscore syntax to look through the user relationship 
+            #and match the email field on the related User model
+
             # This sets the variable customer to a Customer model instance that matches the provided email
             # not storing the email in the variable
             # using the email to look up the corresponding customer
 
-            stripe_customer = stripe.Customer.retrieve(customer.strip_id)
+            #stripe_customer = stripe.Customer.retrieve(customer.strip_id)
+
+            stripe_customer = customers[0]
 
             return Response ({
               'name': stripe_customer.name,
@@ -75,7 +89,7 @@ class CustomerCreate(APIView):
             })
 
         except Customer.DoesNotExist:
-            return Response({"error"})
+            return Response({"error": "Customer not found"}, status=404)
 
         except Exception as e:
-            return Response({'err'})
+            return Response({'error': str(e)}, status=500)

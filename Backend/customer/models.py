@@ -22,12 +22,12 @@ class Customer(models.Model):
     def save(self, *args, **kwargs):
         
         
-        if not self.strip_id:
+        if not self.stripe_id:
             email = self.user.email
             if email != "" or email is not None:
 
                 stripe_id = helper.billing.create_customer(email= email, raw=True)
-                self.strip_id = stripe_id
+                self.stripe_id = stripe_id
         
 
         super().save(*args, **kwargs)
