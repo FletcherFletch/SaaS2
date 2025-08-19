@@ -1,0 +1,15 @@
+This is a notes app that requires a one time payment using stripe to create a note 
+This app also requires a Username and Password to access the application
+
+Flow 
+user registers/logs in
+they need to pay to create a note
+    (maybe they need to pay to see created notes)
+    
+they click a button that takes them to a page "pay to unlock notes" page
+price is shown and button
+button goes to stripe checkout session 
+stripes redirects back to site after payment
+listen to stripe webhooks to confirm payment 
+make user as paid
+user can create notes
