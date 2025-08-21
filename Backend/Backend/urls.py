@@ -19,6 +19,7 @@ from django.urls import path, include
 from api.views import NoteListCreateView
 from rest_framework.routers import DefaultRouter
 from customer.views import CustomerCreate
+from api.views import create_checkout_session_view
 
 router = DefaultRouter()
 router.register(r'notes', NoteListCreateView, basename='notes')
@@ -27,4 +28,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('customerc/', CustomerCreate.as_view(), name="customer-create"),
+    path('create/checkout/session', create_checkout_session_view.as_view(), name="creates-checkout"),
 ]
