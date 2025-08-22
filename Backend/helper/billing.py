@@ -1,6 +1,7 @@
 
 import stripe
 from decouple import config
+from api.models import djUser
 
 DJANGO_DEBUG=config("DJANGO_DEBUG", default=False, cast=bool)
 STRIPE_SECRET_KEY =  config("STRIPE_SECRET_KEY", default="", cast=str)
@@ -12,21 +13,34 @@ if "sk_test" in STRIPE_SECRET_KEY and not DJANGO_DEBUG:
 stripe.api_key = STRIPE_SECRET_KEY
 
 
-def create_customer(
-        name="",
-        email="",
-        raw=False):
+#def create_customer(
+       # name="",
+      #  email="",
+       # raw=False):
+#
+   # response = stripe.Customer.create(
+    #  name=name,
+      #email=email,
 
-    response = stripe.Customer.create(
-      name=name,
-      email=email,
+   # )
 
+  #  if raw:
+   #     return response
+ #   stripe_id = response.id
+  #  return stripe_id
+
+def create_stripe_customer(user):
+    customer = stripe.Customer.create(
+        email=user.email,
+        name=user.get_name(),
     )
 
-    if raw:
-        return response
-    stripe_id = response.id
-    return stripe_id
+    djUser.objects.create(
+        user=user,
+        stripe_customer_id=customer.id,
+    )
+    
+    return customer
 
 def create_product(name="",
         metadata={},
