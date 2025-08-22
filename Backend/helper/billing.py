@@ -84,9 +84,17 @@ def start_checkout_session(customer_id,
             success_url=success_url,
             cancel_url=cancel_url,
             line_items=[{"price": price_stripe_id, "quantity": 1}],
-            mode="subscription",
+            mode="payment",
         ) 
 
         if raw:
             return response
         return response.url 
+
+
+#setattr(_user_sub_obj, 'is_active', True) this is built in python function it means 
+#Set the attributed name on object to the given value 
+#this equals _user_sub_obj.is_active = True 
+#for k, v in update_sub_options.items():
+#   setattr(_user_sub_obj, k, v)
+#sets things dynamically, based on the keys and values in the dictionary  

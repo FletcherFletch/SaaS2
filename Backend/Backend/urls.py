@@ -20,6 +20,10 @@ from api.views import NoteListCreateView
 from rest_framework.routers import DefaultRouter
 from customer.views import CustomerCreate
 from api.views import create_checkout_session_view
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 router = DefaultRouter()
 router.register(r'notes', NoteListCreateView, basename='notes')
@@ -28,5 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('customerc/', CustomerCreate.as_view(), name="customer-create"),
-    path('create/checkout/session', create_checkout_session_view.as_view(), name="creates-checkout"),
+    path('create/checkout/session/', create_checkout_session_view.as_view(), name="creates-checkout"),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pai'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh_view'),
 ]
